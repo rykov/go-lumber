@@ -79,3 +79,12 @@ func (vc *versionConn) Read(buf []byte) (int, error) {
 	n, err := vc.Conn.Read(buf[1:])
 	return n + 1, err
 }
+
+// Allow extraction of original connection
+func (vc *versionConn) Parent() net.Conn {
+	return vc.Conn
+}
+
+func (mc *muxConn) Parent() net.Conn {
+	return mc.Conn
+}
